@@ -118,13 +118,14 @@ def test_delete_missing_key(hash_table):
     assert 'key' in err.value.args
 
 def test_retrevial_after_deletion_of_hash_collision():
-    table = HashTable(((4,0), (8,0)))
+    table = HashTable({4:1, 8:0})
     assert hash(4) % 4 == hash(8) % 4
+    assert table[4] == 1 and table[8] == 0
     del table[4]
     assert table[8] == 0
 
 def test_del_hash_collision_dosent_allow_for_duplicate_keys():
-    table = HashTable(((4,0), (8,0)))
+    table = HashTable({4:0, 8:0})
     assert hash(4) % 4 == hash(8) % 4
     del table[4]
     table[8] = 10
